@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <link rel="icon" type="image/x-icon" href="liceum.png">
+    <noscript>
+        <meta http-equiv="refresh" content="0; url=index.html"> <!-- при отключенном джс перебросит на вход -->
+    </noscript>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- чтоб сайт не сжимало и не растягивало -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- ускорение загрузки шрифтов -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <!-- ускорение загрузки шрифтов -->
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&amp;display=swap" rel="stylesheet"> <!-- загрузка шрифтов -->
+    <title>Самоуправление 2026</title> <!-- название страницы -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> <!-- подключение бустрапа -->
+    <link rel="stylesheet" href="css/style.css"> <!-- связь с ксс -->
+</head>
+
+<body>
+
+<!-- ШАПКА -->
+<header class="container-fluid"> <!-- растягивает шапку до краев -->
+    <div class="container"> <!-- центровка контента -->
+        <div class="row align-items-center"> <!-- выравнивание по вертикали -->
+            <div class="col-6 col-md-4 text-start"> <!-- выделяет место логотипу на всех видах устройств -->
+                <h1 class="logo"><a href="/">Самоуправление 2026</a></h1> <!-- логотип -->
+            </div>
+
+            <div class="col-6 d-md-none text-end"> <!-- выделяет место бургеру на телефоне -->
+                <button class="burger-btn" id="burgerBtn"> <!-- кнопка бургер с кастомным классом -->
+                    <i class="fa-solid fa-bars"></i> <!-- иконка бургеру -->
+                </button>
+            </div>
+
+            <nav id="mobileNav" class="col-12 col-md-8 d-md-flex justify-content-md-end main-nav collapse"> <!-- контейнер навигации -->
+                <button class="close-btn d-md-none" id="closeBtn"> <!-- кнопка крестик на телефоне -->
+                    <i class="fa-solid fa-xmark"></i> <!-- иконка крестика -->
+                </button>
+
+                <ul class="main-menu p-0 m-0"> <!-- список навигационных ссылок -->
+                    <li><a href="main.html" class="nav-link-close"><i class="fa-solid fa-house"></i> Главная</a></li>
+                    <li><a href="about.html" class="nav-link-close"><i class="fa-solid fa-circle-info"></i> О нас</a></li>
+                    <li><a href="shop.html" class="nav-link-close"><i class="fa-solid fa-store"></i> Магазин</a></li>
+
+                    <li class="nav-item dropdown cabinet-dropdown">
+                        <a href="#" class="dropdown-toggle-custom" id="cabinetDropdown">
+                            <i class="fa-solid fa-user"></i> Кабинет
+                        </a>
+                        <ul class="dropdown-menu submenu" id="mobileSubmenu" aria-labelledby="cabinetDropdown"> <!-- вложенный список кнопок -->
+                            <li><a class="dropdown-item" href="profil.html"><i class="fa-solid fa-circle-user"></i> Профиль</a></li>
+                            <li><a class="dropdown-item" id="dublerBtn" href="dubler.html"><i class="fa-solid fa-chalkboard-user"></i> Дублер панель</a></li>
+                            <li id="adminNavItem" style="display:none"><a class="dropdown-item" href="admin.html"><i class="fa-solid fa-user-plus"></i> Админ панель</a></li> <!-- скрипт показывает только админам -->
+                            <li><a class="dropdown-item" id="logoutBtn" href="javascript:void(0)"><i class="fa-solid fa-right-to-bracket"></i> Выход</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<!-- НАЧИСЛЕНИЕ ЗА ДЕЛА И СПИСАНИЕ RENOCOINS -->
+<h3 class="container text-center mt-4">Начисление / списание renocoins</h3> <!-- заголовок -->
+<div class="container pb-5 dub-card"> <!-- центровка контента -->
+    <div class="input-group"> <!-- класс всех надписей и кнопок ввода -->
+        <span class="input-group-text mt-3 none-mobile">Класс и группа</span> <!-- надпись -->
+        <select class="form-select mt-3" id="classSelect" aria-label="Default select example"> <!-- выпадающий список классов -->
+            <option selected disabled>Выберите класс...</option> <!-- надпись -->
+            <!-- сами классы -->
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+        </select>
+        <select class="form-select mt-3" id="dynamicSelect" disabled> <!-- глушилка выбора группы -->
+            <option selected disabled>Сначала выберите класс...</option> <!-- текст глушилки -->
+        </select>
+    </div>
+    <div class="input-group"> <!-- класс всех надписей и кнопок ввода -->
+        <span class="input-group-text mt-3 none-mobile">Ученик</span> <!-- текст -->
+        <select class="form-select mt-3" id="nameSelect" disabled> <!-- глушилка выбора имени -->
+            <option selected disabled>Сначала выберите класс и группу...</option> <!-- текст -->
+        </select>
+    </div>
+
+    <!-- начисление за дело: сумму определяет сервер -->
+    <div class="input-group">
+        <span class="input-group-text mt-3">Дело</span>
+        <select class="form-select mt-3" id="deedSelect">
+            <option value="" selected disabled>Загрузка дел...</option>
+        </select>
+    </div>
+
+    <!-- поле числа: скрипт показывает его только для дел с диапазоном суммы или с фондом -->
+    <div class="input-group" id="deedValueBox" style="display:none">
+        <span class="input-group-text mt-3" id="deedValueLabel">Значение</span>
+        <div class="input-group-text mt-3">
+            <input type="number" class="form-control" id="deedValue" min="1">
+        </div>
+    </div>
+    <button id="giveCoinsBtn" type="button" class="submit mt-3 btn btn-primary pink-mobile main-button">Начислить renocoins за дело</button>
+
+    <hr class="mt-4">
+
+    <!-- свои начисление: сумму и причину пишет сам админ (скрипт показывает блок только админам) -->
+    <div id="customAwardBox" style="display:none">
+        <h5 class="mt-3">Своё начисление (только для админов)</h5>
+        <div class="input-group">
+            <span class="input-group-text mt-3">Количество renocoins</span>
+            <div class="input-group-text mt-3">
+                <input type="number" class="form-control" id="customAmount" min="1">
+            </div>
+            <span class="input-group-text mt-3">За что</span>
+            <div class="input-group-text mt-3">
+                <input type="text" class="form-control" id="customReason" maxlength="255">
+            </div>
+        </div>
+        <button id="customAwardBtn" type="button" class="submit mt-3 btn btn-primary">Начислить своё</button>
+        <hr class="mt-4">
+    </div>
+
+    <!-- списание: вручную, с причиной, либо по списку нарушений -->
+    <div class="input-group">
+        <span class="input-group-text mt-3">Нарушение</span>
+        <select class="form-select mt-3" id="penaltySelect">
+            <option value="" selected disabled>Загрузка нарушений...</option>
+        </select>
+    </div>
+    <div class="input-group"> <!-- класс всех надписей и кнопок ввода -->
+        <span class="input-group-text mt-3">Количество renocoins</span> <!-- текст -->
+        <div class="input-group-text mt-3"> <!-- контейнер поля ввода -->
+            <input type="number" class="form-control" id="coinsAmount" min="1"> <!-- поле ввода количества -->
+        </div>
+        <span class="input-group-text mt-3">За что</span> <!-- текст -->
+        <div class="input-group-text mt-3"> <!-- контейнер поля ввода -->
+            <input type="text" class="form-control" id="coinsReason"> <!-- поле ввода причины -->
+        </div>
+    </div>
+    <button id="takeCoinsBtn" type="button" class="submit mt-3 btn btn-primary">Списать renocoins</button>
+
+    <div id="coinsError" style="color: red; font-size: 14px; margin-top: 5px; min-height: 20px; width: 100%;"></div> <!-- контейнер для ошибки -->
+</div>
+<!-- КОНЕЦ НАЧИСЛЕНИЯ И СПИСАНИЯ RENOCOINS -->
+
+<!-- дезигнед -->
+<div class="footer-bottom container-fluid">
+        &copy; https://samoupravlenie2026.ru | Designed by morisar
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> <!-- бустрап -->
+    <script src="script.js"></script> <!-- подключение js файла -->
+
+    <script>
+    // справочная таблица начислений: данные берём с сервера, чтобы она не расходилась с разбалловкой в app.py
+    (function () {
+        const box = document.getElementById('deedsTable');
+        if (!box) return;
+        fetch('https://samoupravlenie2026.online/api/deeds')
+            .then(res => res.json())
+            .then(deeds => {
+                const wrap = document.createElement('div');
+                wrap.className = 'table-responsive';
+                wrap.style.maxHeight = '500px'; // длинная таблица прокручивается
+                wrap.style.overflowY = 'auto';
+                const table = document.createElement('table');
+                table.className = 'table table-sm table-striped align-middle';
+                const thead = document.createElement('thead');
+                const hr = document.createElement('tr');
+                ['За что', 'Сколько renocoins'].forEach(h => {
+                    const th = document.createElement('th');
+                    th.textContent = h;
+                    hr.appendChild(th);
+                });
+                thead.appendChild(hr);
+                table.appendChild(thead);
+                const tbody = document.createElement('tbody');
+                let lastGroup = null;
+                deeds.forEach(d => {
+                    if (d.group !== lastGroup) { // заголовок группы дел
+                        lastGroup = d.group;
+                        const gr = document.createElement('tr');
+                        const gt = document.createElement('td');
+                        gt.colSpan = 2;
+                        gt.className = 'table-secondary fw-bold';
+                        gt.textContent = d.group;
+                        gr.appendChild(gt);
+                        tbody.appendChild(gr);
+                    }
+                    let value;
+                    if (d.coins !== undefined) value = '+' + d.coins;
+                    else if (d.fund !== undefined) value = 'фонд ' + d.fund + ', делится между создателями';
+                    else value = 'от ' + d.min + ' до ' + d.max;
+                    const tr = document.createElement('tr');
+                    [d.name, value].forEach(v => {
+                        const td = document.createElement('td');
+                        td.textContent = v;
+                        tr.appendChild(td);
+                    });
+                    tbody.appendChild(tr);
+                });
+                table.appendChild(tbody);
+                wrap.appendChild(table);
+                box.innerHTML = '';
+                box.appendChild(wrap);
+            })
+            .catch(() => { box.textContent = 'Не удалось загрузить таблицу.'; });
+    })();
+    </script>
+</body>
+</html>

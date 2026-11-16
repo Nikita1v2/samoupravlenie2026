@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <link rel="icon" type="image/x-icon" href="liceum.png">
+    <noscript>
+        <meta http-equiv="refresh" content="0; url=index.html"> <!-- при отключенном джс перебросит на вход -->
+    </noscript>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- чтоб сайт не сжимало и не растягивало -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css"> <!-- иконки со своего сайта (kit.fontawesome.com не грузился) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- ускорение загрузки шрифтов -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <!-- ускорение загрузки шрифтов -->
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&amp;display=swap" rel="stylesheet"> <!-- загрузка шрифтов -->
+    <title>О нас — Самоуправление 2026</title> <!-- название страницы -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> <!-- подключение бустрапа -->
+    <link rel="stylesheet" href="css/style.css"> <!-- связь с ксс -->
+</head>
+
+<body>
+
+<!-- ШАПКА -->
+<header class="container-fluid"> <!-- растягивает шапку до краев -->
+    <div class="container"> <!-- центровка контента -->
+        <div class="row align-items-center"> <!-- выравнивание по вертикали -->
+            <div class="col-6 col-md-4 text-start"> <!-- выделяет место логотипу на всех видах устройств -->
+                <h1 class="logo"><a href="/">Самоуправление 2026</a></h1> <!-- логотип -->
+            </div>
+
+            <div class="col-6 d-md-none text-end"> <!-- выделяет место бургеру на телефоне -->
+                <button class="burger-btn" id="burgerBtn"> <!-- кнопка бургер с кастомным классом -->
+                    <i class="fa-solid fa-bars"></i> <!-- иконка бургеру -->
+                </button>
+            </div>
+
+            <nav id="mobileNav" class="col-12 col-md-8 d-md-flex justify-content-md-end main-nav"> <!-- контейнер навигации -->
+                <button class="close-btn d-md-none" id="closeBtn"> <!-- кнопка крестик на телефоне -->
+                    <i class="fa-solid fa-xmark"></i> <!-- иконка крестика -->
+                </button>
+
+                <ul class="main-menu p-0 m-0"> <!-- список навигационных ссылок -->
+                    <li><a href="main.html" class="nav-link-close"><i class="fa-solid fa-house"></i> Главная</a></li>
+                    <li><a href="about.html" class="nav-link-close"><i class="fa-solid fa-circle-info"></i> О нас</a></li>
+                    <li><a href="shop.html" class="nav-link-close"><i class="fa-solid fa-store"></i> Магазин</a></li>
+
+                    <li class="nav-item dropdown cabinet-dropdown">
+                        <a href="#" class="dropdown-toggle-custom" id="cabinetDropdown">
+                            <i class="fa-solid fa-user"></i> Кабинет
+                        </a>
+                        <ul class="dropdown-menu submenu" id="mobileSubmenu" aria-labelledby="cabinetDropdown"> <!-- вложенный список кнопок -->
+                            <li><a class="dropdown-item" href="profil.html"><i class="fa-solid fa-circle-user"></i> Профиль</a></li>
+                            <li><a class="dropdown-item" id="dublerBtn" href="dubler.html"><i class="fa-solid fa-chalkboard-user"></i> Дублер панель</a></li>
+                            <li id="adminNavItem" style="display:none"><a class="dropdown-item" href="admin.html"><i class="fa-solid fa-user-plus"></i> Админ панель</a></li> <!-- скрипт показывает только админам -->
+                            <li><a class="dropdown-item" id="logoutBtn" href="javascript:void(0)"><i class="fa-solid fa-right-to-bracket"></i> Выход</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<!-- О НАС -->
+<div class="container about-container">
+
+    <!-- ЗАГОЛОВОК -->
+    <h2 class="about-title">
+        <i class="fa-solid fa-circle-info"></i> О нас
+    </h2>
+    <p class="about-subtitle">Тут вы можете познакомиться с небольшой частью нашей команды.</p>
+
+    <!-- ДИРЕКТОР (сверху) -->
+    <div class="row g-4 justify-content-center about-row">
+            <div class="col-12 col-sm-6 col-lg-4">
+                <div class="about-card" role="button" tabindex="0" data-name="Евгений Соколов" data-role="Директор">
+                    <div class="about-card-image">
+                        <img src="image/sokolov.png" alt="Фото 1">
+                    </div>
+                    <div class="about-card-caption">
+                        <h3>Евгений Соколов</h3>
+                        <span>Директор</span>
+                    </div>
+                    <div class="about-card-text"> <!-- текст покажется при нажатии -->
+                        <p>Я Евгений Соколов, учусь в 11 классе, группа ИТ. В лицее я с первого класса, так что это место для меня давно уже не просто школа. Сейчас я выдвигаюсь в директора на неделю самоуправления — и мне правда хочется что-то изменить, а не просто посидеть в кресле.
+
+Мы готовим эту неделю самоуправления ещё с конца прошлого учебного года. За это время многое продумали, обсудили и собрали — так что подходим к ней не с пустыми руками. В нашем деле самоуправления мы берём только самое лучшее, что было на прошлых неделях, и добавляем что-то своё новое. Например, игры для учителей во время учебной деятельности — чтобы они тоже почувствовали себя на месте учеников.
+
+Про себя скажу честно: я не люблю делать что-то наполовину. Если уж взялся — доведу до конца. И с людьми работать умею, и повести за собой могу. В «Что? Где? Когда?» по-другому никак. Я играю в лицейской команде «Яблоко», мы не раз брали первые места в городе. Езжу в составе сборной Усть-Илимска на выездные турниры, оттуда тоже привозим призовые места. Лидерство для меня — это не громкие слова, а момент, когда надо собраться и вытащить команду.
+
+Ещё я программист. Участвовал в олимпиадах по кибербезопасности, в том числе в международной, где мы командой заняли шестое место. Был участником «Ученика года». Шесть лет занимался лесничеством и радиотехникой — так что руками тоже работать умею.</p>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <!-- РЯД 1: 3 карточки -->
+    <div class="row g-4 justify-content-center about-row">
+            <div class="col-12 col-sm-6 col-lg-4">
+                <div class="about-card" role="button" tabindex="0" data-name="Александр Самков" data-role="Дублер заместителя директора">
+                    <div class="about-card-image">
+                        <img src="image/samkov.png" alt="Фото 2">
+                    </div>
+                    <div class="about-card-caption">
+                        <h3>Александр Самков</h3>
+                        <span>Дублер заместителя директора</span>
+                    </div>
+                    <div class="about-card-text"> <!-- текст покажется при нажатии -->
+                        <p>Всем привет! Меня зовут Александр Самков. Я учусь в 11-м классе в группе ИТ. На неделе самоуправления я хочу попробовать себя в роли завуча старшей школы. Главная цель — изнутри понять, как строится учебный процесс, и применить системный подход к составлению школьного расписания (голосуйте за "Яблоко").</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4">
+                <div class="about-card" role="button" tabindex="0" data-name="Кирилл Зуев" data-role="Дублер заместителя директора">
+                    <div class="about-card-image">
+                        <img src="image/zuev.png" alt="Фото 3">
+                    </div>
+                    <div class="about-card-caption">
+                        <h3>Кирилл Зуев</h3>
+                        <span>Дублер заместителя директора</span>
+                    </div>
+                    <div class="about-card-text"> <!-- текст покажется при нажатии -->
+                        <p>Меня зовут Зуев Кирилл, я учащийся 11-го класса ИТ. Ещё в прошлом году мы решили, что создадим команду, разработаем сайт, подготовим отличную программу и представим вам лучшую Неделю самоуправления. В основном я занимался написанием этого сайта, корректировал идеи, помогал воплощать их в жизнь, а также отвечал за ведение наших социальных сетей. Я лично гарантирую: отдав голос за нас, вы не пожалеете. На Неделе самоуправления я буду заменять заместителя директора по воспитательной работе.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4">
+                <div class="about-card" role="button" tabindex="0" data-name="Никита Добровольский" data-role="Дублер заместителя директора">
+                    <div class="about-card-image">
+                        <img src="image/nikitos.png" alt="Фото 4">
+                    </div>
+                    <div class="about-card-caption">
+                        <h3>Никита Добровольский</h3>
+                        <span>Дублер заместителя директора</span>
+                    </div>
+                    <div class="about-card-text"> <!-- текст покажется при нажатии -->
+                        <p>Меня зовут Никита Добровольский, я учусь в 11 классе и планирую стать дублёром в сфере воспитательной работы. Моя  мечта — поступить в хороший вуз, и я усердно работаю над её осуществлением.
+
+Вместе с Кириллом мы создали сайт для Недели самоуправления, где я отвечаю за хостинг и деплой стека.</p>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <!-- РЯД 2: 3 карточки -->
+    <div class="row g-4 justify-content-center about-row">
+            <div class="col-12 col-sm-6 col-lg-4">
+                <div class="about-card" role="button" tabindex="0" data-name="Тимофей Новокрещенных" data-role="Дублер заместителя директора">
+                    <div class="about-card-image">
+                        <img src="image/timoha.png" alt="Фото 5">
+                    </div>
+                    <div class="about-card-caption">
+                        <h3>Тимофей Новокрещенных</h3>
+                        <span>Дублер заместителя директора</span>
+                    </div>
+                    <div class="about-card-text"> <!-- текст покажется при нажатии -->
+                        <p>Я Новокрещенных Тимофей из 11 класса (ИТ-направление). На неделе самоуправления буду дублером заместителя директора по безопасности.
+Немного о себе: увлекаюсь IT, к обязанностям отношусь ответственно.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4">
+                <div class="about-card" role="button" tabindex="0" data-name="Елизавета Левина и Влада Ефремова" data-role="Активные участники команды">
+                    <div class="about-card-image">
+                        <img src="image/lizawlada.png" alt="Фото 6">
+                    </div>
+                    <div class="about-card-caption">
+                        <h3>Елизавета Левина и Влада Ефремова</h3>
+                        <span>Активные участники команды</span>
+                    </div>
+                    <div class="about-card-text"> <!-- текст покажется при нажатии -->
+                        <p>Мы - Левина Лиза и Ефремова Влада, учащиеся 11го класса, СГ-2. 💘 
+В процессе агитации мы помогали в постановке танца, создавали постеры, предлагали классные идеи, чтобы эта неделя была для вас незабываемой, а также снимали много классных видео.
+Мы уверены, что эта неделя будет самой запоминающейся! 🍎</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4">
+                <div class="about-card" role="button" tabindex="0" data-name="Мария Гончар" data-role="Активный участник команды">
+                    <div class="about-card-image">
+                        <img src="image/masha.png" alt="Фото 7">
+                    </div>
+                    <div class="about-card-caption">
+                        <h3>Мария Гончар</h3>
+                        <span>Активный участник команды</span>
+                    </div>
+                    <div class="about-card-text"> <!-- текст покажется при нажатии -->
+                        <p>Меня зовут Маша, я учусь в 10 классе группы ИТ. В течении недели я помогала в создании недели своими идеями, помогала команде чем могла, а также приняла участие в представлении недели в понедельник. Я знаю что эта неделя будет лучшая🫶🏻</p>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <!-- РЯД 3: 4 карточки -->
+    <div class="row g-4 justify-content-center about-row">
+            <div class="col-12 col-sm-6 col-lg-4">
+                <div class="about-card" role="button" tabindex="0" data-name="Диана Сизова" data-role="Активный участник команды">
+                    <div class="about-card-image">
+                        <img src="image/demon.png" alt="Фото 8">
+                    </div>
+                    <div class="about-card-caption">
+                        <h3>Диана Сизова</h3>
+                        <span>Активный участник команды</span>
+                    </div>
+                    <div class="about-card-text"> <!-- текст покажется при нажатии -->
+                        <p>Меня зовут Диана, я учусь в 10 классе, группа ИТ.
+Я помогала везде, где только могла. Я агитировала, танцевала, пела. И даже помогала в написании текста для одной из наших песен.
+Всегда старалась помочь и быть рядом с командой. Мы очень старались не покладая рук почти год, чтобы придумать для вас и постараться реализовать лучшую неделю самоуправления!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4">
+                <div class="about-card" role="button" tabindex="0" data-name="Елизавета Наумова" data-role="Активный участник команды">
+                    <div class="about-card-image">
+                        <img src="image/liza.png" alt="Фото 9">
+                    </div>
+                    <div class="about-card-caption">
+                        <h3>Елизавета Наумова</h3>
+                        <span>Активный участник команды</span>
+                    </div>
+                    <div class="about-card-text"> <!-- текст покажется при нажатии -->
+                        <p>Я, Наумова Лиза, состою в команде Евгения Соколова и являюсь ученицей группы ИТ. Мы с ребятами очень старались подготовить для вас много интересных активностей, которые могли бы привлечь ваше внимание. Я принимала активное участие как в агитационной неделе, так и в подготовке к ней. Мы писали песни, придумывали танец для выхода, разрабатывали различные конкурсы, делали плакаты и старались найти индивидуальный подход к каждому.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4">
+                <div class="about-card" role="button" tabindex="0" data-name="Елизавета Чекалкина" data-role="Активный участник команды">
+                    <div class="about-card-image">
+                        <img src="image/chek.png" alt="Фото 10">
+                    </div>
+                    <div class="about-card-caption">
+                        <h3>Елизавета Чекалкина</h3>
+                        <span>Активный участник команды</span>
+                    </div>
+                    <div class="about-card-text"> <!-- текст покажется при нажатии -->
+                        <p>Меня зовут Чекалкина Елизавета. Я являюсь ученицей 10-го класса информационно-технологической группы и состою в команде «Яблоко». В рамках недели агитации я принимала участие в организации мероприятий, а также в ведении социальных сетей. Я хочу совершенствовать навыки работы с цифровым контентом пробовать себя в новых направлениях. Мы с командой очень старались чтобы создать для вас интересную неделю 🫶🏻.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4">
+                <div class="about-card" role="button" tabindex="0" data-name="Давид Шишмарёв" data-role="ЯБЛОКО!!!!!!!!!!!! ЯБЛОКО!!!!!!!!!!!! ЯБЛОКО!!!!!!!!!!!!">
+                    <div class="about-card-image">
+                        <img src="image/david.png" alt="Фото 11">
+                    </div>
+                    <div class="about-card-caption">
+                        <h3>Давид Шишмарёв</h3>
+                        <span>ЯБЛОКО!!!!!!!!!!!! ЯБЛОКО!!!!!!!!!!!! ЯБЛОКО!!!!!!!!!!!!</span>
+                    </div>
+                    <div class="about-card-text"> <!-- текст покажется при нажатии -->
+                        <p>Здарова, меня зовут Давид Шишмарев. Я не официальный член команды «Яблоко», но я активный участник агитационной кампании. Меня многие знают по митингу, а также я создавал агитационные плакаты, задавая неделе соревновательный тон.</p>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
+<!-- ОКНО С ТЕКСТОМ -->
+<div class="modal fade" id="aboutModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content about-modal">
+            <div class="modal-header">
+                <div>
+                    <h5 class="modal-title" id="aboutModalName"></h5>
+                    <div class="about-modal-role" id="aboutModalRole"></div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+            </div>
+            <div class="modal-body" id="aboutModalText"></div>
+        </div>
+    </div>
+</div>
+<!-- КОНЕЦ О НАС -->
+
+<!-- ФУТЕР -->
+<div class="footer container-fluid"> <!-- контейнер всего футера, который растягивается на всю ширину -->
+    <div class="footer-content container"> <!-- контейнер контента в футере -->
+        <div class="row"> <!-- строка -->
+            <div class="footer-section about col-md-4 col-12"> <!-- разделение футера -->
+                <p>
+                    Самоуправление 2026 - это сайт, сделанный специально для одноименного мероприятия
+                    в Усть-Илимском Экспериментальном лицее имени М.М.Батербиева.
+                </p>
+                <div class="socials"> <!-- соцсети с кастомным классом -->
+                <!-- список соцсетей -->
+                    <a href="https://t.me/apple_winner"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- дезигнед -->
+<div class="footer-bottom container-fluid">
+        &copy; https://samoupravlenie2026.ru | Designed by morisar
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> <!-- бустрап -->
+    <script src="script.js"></script> <!-- подключение js файла -->
+</body>
+</html>

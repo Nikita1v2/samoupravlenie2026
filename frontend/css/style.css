@@ -1,0 +1,1716 @@
+/* ========================================================= */
+/* ОБЩЕЕ ОФОРМЛЕНИЕ САЙТА */
+/* ========================================================= */
+
+:root {
+    --purple: #7b2cbf; /* основной фиолетовый */
+    --purple-dark: #4a176f; /* темный фиолетовый */
+    --purple-light: #a855f7; /* светлый фиолетовый */
+    --pink: #d946ef; /* дополнительный акцент */
+    --background: #f7f5fb; /* фон сайта */
+    --card: #ffffff; /* фон карточек */
+    --text: #292331; /* основной текст */
+    --muted: #756d7d; /* вторичный текст */
+    --border: #e9e2ef; /* границы */
+    --shadow: 0 14px 40px rgba(70, 32, 91, 0.10); /* основная тень */
+}
+
+* {
+    box-sizing: border-box; /* учитываем рамки и отступы внутри размеров */
+}
+
+html {
+    scroll-behavior: smooth; /* плавная прокрутка */
+}
+
+body {
+    background:
+        radial-gradient(circle at 10% 0%, rgba(168, 85, 247, 0.10), transparent 28%),
+        radial-gradient(circle at 90% 15%, rgba(217, 70, 239, 0.08), transparent 25%),
+        var(--background); /* красивый многослойный фон */
+    font-family: 'Comfortaa', cursive; /* основной шрифт */
+    color: var(--text); /* цвет текста */
+    margin: 0; /* обнуление внешних отступов */
+    padding: 0; /* обнуление внутренних отступов */
+
+    display: flex; /* включаем гибкую разметку */
+    flex-direction: column; /* выстраиваем элементы в столбик */
+    min-height: 100vh; /* высота минимум на весь экран */
+}
+
+html, h1, h2, h3, h4, h5, h6 {
+    color: var(--text); /* единый цвет текста */
+}
+
+a {
+    text-decoration: none; /* убираем подчеркивание */
+    color: inherit; /* наследуем цвет */
+}
+
+button,
+input,
+select {
+    font-family: 'Comfortaa', cursive; /* единый шрифт элементов */
+}
+
+
+/* ========================================================= */
+/* ШАПКА */
+/* ========================================================= */
+
+header {
+    position: relative; /* относительное позиционирование */
+    z-index: 2000; /* шапка поверх остальных элементов */
+    background: linear-gradient(135deg, #5b1688 0%, #7b2cbf 48%, #9d3edd 100%); /* градиент */
+    padding: 14px 0; /* внутренние отступы */
+    box-shadow: 0 8px 30px rgba(65, 20, 90, 0.20); /* тень */
+}
+
+header::after {
+    content: ""; /* декоративный элемент */
+    position: absolute; /* абсолютное положение */
+    left: 0; /* от левого края */
+    right: 0; /* до правого края */
+    bottom: 0; /* снизу */
+    height: 1px; /* высота */
+    background: rgba(255,255,255,0.25); /* светлая линия */
+}
+
+header .logo {
+    margin: 0; /* убираем стандартный отступ */
+    line-height: 1.1; /* высота строки */
+}
+
+header .logo a,
+header .logo {
+    color: white !important; /* белый логотип */
+    font-weight: 700; /* жирность */
+}
+
+header .logo a {
+    font-size: 1.65rem; /* размер логотипа */
+    letter-spacing: -0.5px; /* компактнее */
+    transition: opacity 0.2s ease; /* плавность */
+}
+
+header .logo a:hover {
+    color: white !important; /* не меняем цвет */
+    opacity: 0.88; /* слегка приглушаем */
+}
+
+
+/* ========================================================= */
+/* ГЛАВНОЕ МЕНЮ */
+/* ========================================================= */
+
+.main-menu {
+    display: flex; /* меню в строку */
+    align-items: center; /* выравнивание */
+    list-style: none; /* убираем точки */
+    gap: 5px; /* расстояние между кнопками */
+}
+
+.main-menu > li {
+    position: relative; /* нужно для выпадающего меню */
+}
+
+.main-menu > li > a,
+.dropdown-toggle-custom {
+    display: block; /* ссылка как блок */
+    color: rgba(255,255,255,0.94) !important; /* белый текст */
+    font-size: 0.98rem; /* размер */
+    font-weight: 600; /* жирность */
+    padding: 11px 14px; /* внутренние отступы */
+    border: 1px solid transparent; /* место под рамку */
+    border-radius: 12px; /* скругление */
+    transition: all 0.2s ease; /* плавность */
+}
+
+.main-menu > li > a:hover,
+.main-menu > li > a:focus,
+.dropdown-toggle-custom:hover,
+.dropdown-toggle-custom:focus {
+    color: white !important; /* сохраняем белый текст */
+    background: rgba(255,255,255,0.14); /* подсветка */
+    border-color: rgba(255,255,255,0.12); /* рамка */
+    transform: translateY(-1px); /* небольшое движение */
+}
+
+
+/* ========================================================= */
+/* КАБИНЕТ / ВЫПАДАЮЩЕЕ МЕНЮ */
+/* ========================================================= */
+
+.cabinet-dropdown {
+    position: relative; /* база для абсолютного меню */
+}
+
+.cabinet-dropdown::after {
+    content: ""; /* невидимый мостик */
+    position: absolute; /* абсолютное положение */
+    left: 0; /* начало */
+    right: 0; /* конец */
+    top: 100%; /* сразу под кнопкой */
+    height: 9px; /* перекрывает зазор */
+}
+
+.submenu {
+    display: none; /* по умолчанию скрываем */
+    position: absolute; /* абсолютное позиционирование */
+    top: calc(100% + 7px); /* располагаем под кнопкой */
+    right: 0; /* прижимаем вправо */
+    left: auto; /* отключаем левую привязку */
+    width: 235px; /* ширина меню */
+    min-width: 0; /* отменяем bootstrap */
+    padding: 7px; /* внутренний отступ */
+    margin: 0; /* сбрасываем margin */
+    list-style: none; /* без точек */
+    background: rgba(91, 22, 136, 0.98); /* фон */
+    border: 1px solid rgba(255,255,255,0.16); /* рамка */
+    border-radius: 15px; /* скругление */
+    box-shadow: 0 18px 45px rgba(50, 15, 70, 0.28); /* тень */
+    backdrop-filter: blur(12px); /* размытие */
+    z-index: 3000; /* поверх всего */
+}
+
+.cabinet-dropdown:hover .submenu,
+.cabinet-dropdown:focus-within .submenu {
+    display: block; /* показываем при наведении */
+}
+
+.submenu li {
+    width: 100%; /* вся ширина */
+}
+
+.submenu li a {
+    display: block; /* ссылка блоком */
+    width: 100%; /* вся ширина */
+    color: white !important; /* белый текст */
+    background: transparent !important; /* без bootstrap-фона */
+    padding: 11px 13px; /* отступы */
+    border-radius: 9px; /* скругление */
+    font-size: 0.91rem; /* размер */
+    font-weight: 500; /* жирность */
+    transition: background 0.18s ease, transform 0.18s ease; /* плавность */
+}
+
+.submenu li a:hover,
+.submenu li a:focus {
+    color: white !important; /* текст не исчезает */
+    background: rgba(255,255,255,0.13) !important; /* подсветка */
+    transform: translateX(2px); /* движение */
+}
+
+
+/* ========================================================= */
+/* КАРУСЕЛЬ */
+/* ========================================================= */
+
+.slider-title {
+    text-align: center; /* центр */
+    font-size: 1.55rem; /* размер */
+    font-weight: 700; /* жирность */
+    margin: 22px 0 14px; /* отступ */
+}
+
+.carousel {
+    height: 450px; /* высота */
+    margin-bottom: 35px; /* отступ снизу */
+    border-radius: 30px; /* скругление */
+    overflow: hidden; /* обрезаем содержимое */
+    box-shadow: var(--shadow); /* тень */
+}
+
+.carousel-inner,
+.carousel-item {
+    height: 450px; /* высота */
+    border-radius: 30px; /* скругление */
+    overflow: hidden; /* обрезка */
+}
+
+.carousel-item img {
+    width: 100%; /* ширина */
+    height: 100%; /* высота */
+    object-fit: cover; /* заполняем блок */
+}
+
+
+/* ========================================================= */
+/* ОБЩИЕ КНОПКИ И ФОРМЫ */
+/* ========================================================= */
+
+/* Исправляем bootstrap: текст кнопок больше не исчезает при наведении */
+
+.submit {
+    display: block; /* кнопка отдельным блоком */
+    width: 500px; /* ширина */
+    min-height: 48px; /* высота */
+    padding: 11px 18px; /* отступы */
+    font-size: 1.02rem; /* размер */
+    font-weight: 600; /* жирность */
+    color: var(--text) !important; /* цвет текста */
+    background: white !important; /* фон */
+    border: 1px solid var(--border) !important; /* рамка */
+    border-radius: 12px !important; /* скругление */
+    box-shadow: 0 5px 18px rgba(50,20,65,0.06); /* тень */
+    transition: all 0.2s ease; /* плавность */
+}
+
+.submit:hover,
+.submit:focus {
+    color: var(--purple-dark) !important; /* текст при наведении */
+    background: #ffffff !important; /* фон при наведении */
+    border-color: #d8c3e2 !important; /* рамка */
+    transform: translateY(-2px); /* движение */
+    box-shadow: 0 9px 24px rgba(70,30,90,0.12); /* тень */
+}
+
+.submit.main-button {
+    color: white !important; /* основной текст */
+    background: linear-gradient(135deg, var(--purple), var(--pink)) !important; /* градиент */
+    border: none !important; /* без рамки */
+    box-shadow: 0 8px 22px rgba(123,44,191,0.27); /* тень */
+}
+
+.submit.main-button:hover,
+.submit.main-button:focus {
+    color: white !important; /* текст НЕ исчезает */
+    background: linear-gradient(135deg, var(--purple-dark), #a12bb8) !important; /* фон */
+    border: none !important; /* без рамки */
+}
+
+.main-button {
+    color: white !important; /* текст */
+}
+
+button {
+    cursor: pointer; /* курсор */
+}
+
+.form-control,
+.form-select {
+    min-height: 46px; /* удобная высота */
+    border: 1px solid #ddd4e4 !important; /* рамка */
+    border-radius: 11px !important; /* скругление */
+    color: var(--text) !important; /* текст */
+    background-color: rgba(255,255,255,0.96) !important; /* фон */
+    box-shadow: 0 3px 12px rgba(50,20,65,0.035); /* тень */
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #b56ad8 !important; /* рамка при фокусе */
+    box-shadow: 0 0 0 4px rgba(168,85,247,0.12) !important; /* подсветка */
+}
+
+.input-group {
+    margin-bottom: 5px; /* расстояние */
+}
+
+.input-group-text {
+    color: var(--muted); /* цвет текста */
+    background: transparent !important; /* прозрачный фон */
+    border: none !important; /* без рамки */
+    font-weight: 600; /* жирность */
+}
+
+.input-error {
+    border: 2px solid #ef4444 !important; /* красная рамка */
+}
+
+.form-check-label {
+    color: var(--muted); /* цвет */
+}
+
+
+/* ========================================================= */
+/* ПРОФИЛЬ И ДУБЛЕР ПАНЕЛЬ */
+/* ========================================================= */
+
+.profile-card,
+.dub-card {
+    background: rgba(255,255,255,0.92); /* фон */
+    border: 1px solid var(--border); /* рамка */
+    border-radius: 22px; /* скругление */
+    padding: 24px 26px; /* отступ */
+    box-shadow: var(--shadow); /* тень */
+    backdrop-filter: blur(10px); /* размытие */
+}
+
+.dub-card {
+    margin-top: 22px; /* отступ сверху */
+}
+
+.profil {
+    margin: 10px 0; /* отступ */
+    font-weight: 500; /* жирность */
+    color: var(--muted); /* цвет */
+    line-height: 1.55; /* высота */
+}
+
+.profil span {
+    color: var(--purple); /* выделение */
+    font-weight: 700; /* жирность */
+}
+
+#coinsLabel {
+    color: inherit !important; /* наследуем цвет */
+    font-weight: normal !important; /* обычная жирность */
+}
+
+.container h3 {
+    color: var(--text); /* цвет */
+    font-size: 1.15rem; /* размер */
+    font-weight: 700; /* жирность */
+    margin-bottom: 13px; /* отступ */
+}
+
+
+/* ========================================================= */
+/* ЛОГИ */
+/* ========================================================= */
+
+.logs-box {
+    background: #17131a; /* темный фон */
+    color: #f5f1f7; /* светлый текст */
+    border: 1px solid #302734; /* рамка */
+    border-radius: 18px; /* скругление */
+    padding: 14px; /* отступ */
+    max-height: 380px; /* максимальная высота */
+    overflow-y: auto; /* прокрутка */
+    box-shadow: 0 12px 30px rgba(35,20,40,0.12); /* тень */
+}
+
+.log-entry {
+    background: #1d1820; /* фон записи */
+    border: 1px solid #332b36; /* рамка */
+    padding: 12px 14px; /* отступ */
+    margin-bottom: 8px; /* расстояние */
+    border-radius: 10px; /* скругление */
+    font-size: 0.91rem; /* размер */
+    line-height: 1.5; /* читаемость */
+}
+
+.log-entry:hover {
+    background: #27202b; /* фон при наведении */
+}
+
+.log-plus {
+    color: #4ade80 !important; /* зеленый */
+    font-weight: 700; /* жирность */
+}
+
+.log-minus {
+    color: #fb7185 !important; /* красный */
+    font-weight: 700; /* жирность */
+}
+
+
+/* ========================================================= */
+/* МАГАЗИН */
+/* ========================================================= */
+
+.shop-container {
+    margin-top: 30px; /* отступ */
+    margin-bottom: 0; /* футер находится вне магазина */
+    padding-bottom: 70px; /* воздух между последними карточками и футером */
+}
+
+.shop-title {
+    display: flex; /* строка */
+    align-items: center; /* центр */
+    justify-content: center; /* центрируем */
+    gap: 11px; /* расстояние */
+    color: var(--text); /* цвет */
+    font-size: 2rem; /* размер */
+    font-weight: 700; /* жирность */
+    margin: 0 0 8px; /* отступ */
+}
+
+.shop-title i {
+    color: var(--purple); /* иконка */
+}
+
+.shop-balance {
+    display: flex; /* строка */
+    align-items: center; /* центр */
+    justify-content: center; /* центр */
+    gap: 8px; /* расстояние */
+    width: fit-content; /* размер по содержимому */
+    margin: 0 auto 28px; /* центрируем */
+    padding: 10px 16px; /* отступ */
+    color: var(--muted); /* текст */
+    background: rgba(255,255,255,0.88); /* фон */
+    border: 1px solid var(--border); /* рамка */
+    border-radius: 12px; /* скругление */
+    box-shadow: 0 5px 18px rgba(60,25,75,0.06); /* тень */
+}
+
+.shop-balance i,
+.shop-card-price i {
+    color: #e0a800; /* цвет монет */
+}
+
+.shop-card {
+    height: 100%; /* одинаковая высота */
+    overflow: hidden; /* обрезаем содержимое */
+    background: rgba(255,255,255,0.96); /* фон */
+    border: 1px solid var(--border); /* рамка */
+    border-radius: 19px; /* скругление */
+    box-shadow: 0 8px 25px rgba(60,25,75,0.07); /* тень */
+    transition: transform 0.22s ease, box-shadow 0.22s ease; /* анимация */
+}
+
+.shop-card:hover {
+    transform: translateY(-6px); /* поднимаем карточку */
+    box-shadow: 0 18px 38px rgba(60,25,75,0.14); /* усиливаем тень */
+}
+
+.shop-card-image {
+    width: 100%; /* ширина */
+    aspect-ratio: 1 / 1; /* строго квадрат */
+    overflow: hidden; /* обрезаем */
+    background: linear-gradient(135deg, #f5eafa, #fdf5ff); /* фон */
+}
+
+.shop-card-image img {
+    display: block; /* убираем пробел */
+    width: 100%; /* ширина */
+    height: 100%; /* высота */
+    object-fit: cover; /* заполняем */
+    transition: transform 0.35s ease; /* анимация */
+}
+
+.shop-card:hover .shop-card-image img {
+    transform: scale(1.035); /* легкое увеличение */
+}
+
+.shop-card-content {
+    padding: 15px 16px 17px; /* отступ */
+}
+
+.shop-card-content h3 {
+    color: var(--text); /* цвет */
+    font-size: 1rem; /* размер */
+    font-weight: 700; /* жирность */
+    line-height: 1.35; /* высота */
+    margin: 0 0 7px; /* отступ */
+}
+
+.shop-card-content p {
+    color: var(--muted); /* цвет */
+    font-size: 0.84rem; /* размер */
+    line-height: 1.45; /* высота */
+    margin: 0 0 11px; /* отступ */
+    min-height: 39px; /* одинаковая высота */
+}
+
+.shop-card-price {
+    display: flex; /* строка */
+    align-items: center; /* центр */
+    gap: 5px; /* расстояние */
+    color: var(--text); /* цвет */
+    font-size: 0.88rem; /* размер */
+    font-weight: 700; /* жирность */
+    margin-bottom: 11px; /* отступ */
+}
+
+.shop-buy-btn {
+    display: inline-flex; /* строка */
+    align-items: center; /* центр */
+    justify-content: center; /* центр */
+    gap: 7px; /* расстояние */
+    padding: 8px 13px; /* отступ */
+    border: 1px solid #d9c3e5; /* рамка */
+    border-radius: 10px; /* скругление */
+    background: #f7edfb; /* фон */
+    color: var(--purple-dark) !important; /* текст */
+    font-size: 0.86rem; /* размер */
+    font-weight: 700; /* жирность */
+    transition: all 0.2s ease; /* плавность */
+}
+
+.shop-buy-btn:hover,
+.shop-buy-btn:focus {
+    color: white !important; /* текст */
+    background: var(--purple) !important; /* фон */
+    border-color: var(--purple) !important; /* рамка */
+    transform: translateY(-1px); /* движение */
+}
+
+
+/* ========================================================= */
+/* ФУТЕР */
+/* ========================================================= */
+
+.footer {
+    margin-top: auto; /* прижимаем футер вниз */
+    color: white; /* текст */
+    background: linear-gradient(135deg, #4a176f, #7020a1); /* градиент */
+}
+
+.footer .footer-section {
+    padding: 24px 15px; /* отступ */
+}
+
+.footer .footer-section p {
+    color: rgba(255,255,255,0.88); /* цвет текста */
+    line-height: 1.6; /* читаемость */
+}
+
+.footer .about .socials a {
+    display: inline-flex; /* центрирование */
+    align-items: center; /* центр */
+    justify-content: center; /* центр */
+    width: 42px; /* ширина */
+    height: 40px; /* высота */
+    margin-right: 5px; /* расстояние */
+    border: 1px solid rgba(255,255,255,0.30); /* рамка */
+    border-radius: 10px; /* скругление */
+    color: white; /* цвет */
+    transition: all 0.2s ease; /* плавность */
+}
+
+.footer .about .socials a:hover {
+    color: white; /* цвет */
+    background: rgba(255,255,255,0.13); /* фон */
+    border-color: rgba(255,255,255,0.65); /* рамка */
+    transform: translateY(-2px); /* движение */
+}
+
+.footer-bottom {
+    padding: 9px 10px; /* отступ */
+    text-align: center; /* центр */
+    color: rgba(255,255,255,0.78); /* текст */
+    background: #35104f; /* фон */
+    font-size: 0.82rem; /* размер */
+}
+
+
+/* ========================================================= */
+/* МОБИЛЬНАЯ ВЕРСИЯ */
+/* ========================================================= */
+
+@media (max-width: 767px) {
+
+    header {
+        padding: 12px 0; /* отступ */
+        min-height: 66px; /* высота */
+    }
+
+    header .logo a {
+        font-size: 1.22rem; /* размер */
+    }
+
+    .main-nav {
+        display: none; /* скрываем меню */
+        position: fixed; /* фиксируем на экране */
+        top: 0; /* сверху */
+        left: 0; /* слева */
+        width: 100vw; /* вся ширина */
+        height: 100vh; /* вся высота */
+        padding: 78px 22px 24px; /* отступы */
+        background: linear-gradient(155deg, #5b1688, #7b2cbf 60%, #8e2fb7); /* фон */
+        z-index: 9999; /* поверх всего */
+        flex-direction: column; /* столбик */
+        align-items: center; /* центр */
+        box-sizing: border-box; /* размеры */
+        overflow-y: auto; /* прокрутка */
+    }
+
+    .main-nav.active {
+        display: flex !important; /* показываем */
+    }
+
+    .main-menu {
+        width: 100%; /* ширина */
+        max-width: 360px; /* максимум */
+        flex-direction: column; /* столбик */
+        align-items: stretch; /* растягиваем */
+        gap: 10px; /* расстояние */
+    }
+
+    .main-menu li {
+        width: 100%; /* ширина */
+        list-style: none; /* без точек */
+    }
+
+    .main-menu > li > a,
+    .dropdown-toggle-custom {
+        width: 100%; /* ширина */
+        padding: 14px 17px; /* отступ */
+        color: white !important; /* цвет */
+        background: rgba(255,255,255,0.09) !important; /* фон */
+        border: 1px solid rgba(255,255,255,0.17) !important; /* рамка */
+        border-radius: 13px; /* скругление */
+    }
+
+    .main-menu > li > a:hover,
+    .dropdown-toggle-custom:hover {
+        color: white !important; /* цвет */
+        background: rgba(255,255,255,0.16) !important; /* фон */
+        transform: none; /* убираем движение */
+    }
+
+    .burger-btn {
+        color: white !important; /* цвет */
+        background: transparent !important; /* прозрачность */
+        border: none !important; /* без рамки */
+        font-size: 1.55rem; /* размер */
+        padding: 4px 8px; /* отступ */
+    }
+
+    .close-btn {
+        position: absolute; /* положение */
+        top: 17px; /* сверху */
+        right: 20px; /* справа */
+        color: white !important; /* цвет */
+        background: transparent !important; /* фон */
+        border: none !important; /* рамка */
+        font-size: 2rem; /* размер */
+    }
+
+    .cabinet-dropdown::after {
+        display: none; /* отключаем мостик */
+    }
+
+    .cabinet-dropdown .submenu {
+        position: relative; /* в потоке */
+        top: 0; /* сброс */
+        right: auto; /* сброс */
+        width: 100%; /* ширина */
+        margin-top: 6px; /* отступ */
+        padding: 5px; /* отступ */
+        background: rgba(0,0,0,0.16) !important; /* затемнение */
+        border: none; /* без рамки */
+        box-shadow: none; /* без тени */
+        border-radius: 11px; /* скругление */
+        backdrop-filter: none; /* без размытия */
+    }
+
+    .cabinet-dropdown:hover .submenu {
+        display: none; /* на телефоне только по нажатию */
+    }
+
+    .cabinet-dropdown .submenu.open {
+        display: block !important; /* открываем по клику */
+    }
+
+    .cabinet-dropdown .submenu li a {
+        padding: 12px 15px 12px 30px; /* вложенный отступ */
+        color: rgba(255,255,255,0.92) !important; /* цвет */
+        background: transparent !important; /* фон */
+    }
+
+    .cabinet-dropdown .submenu li a:hover {
+        color: white !important; /* цвет */
+        background: rgba(255,255,255,0.10) !important; /* фон */
+    }
+
+    .carousel {
+        height: 190px; /* высота */
+        margin-bottom: 22px; /* отступ */
+        border-radius: 13px; /* скругление */
+    }
+
+    .carousel-inner,
+    .carousel-item {
+        height: 180px; /* высота */
+        border-radius: 13px; /* скругление */
+    }
+
+    .slider-title {
+        font-size: 1.25rem; /* размер */
+        margin: 14px 0 10px; /* отступ */
+    }
+
+    .profile-card,
+    .dub-card {
+        padding: 18px; /* отступ */
+        border-radius: 17px; /* скругление */
+    }
+
+    .shop-container {
+        margin-top: 22px; /* отступ */
+        margin-bottom: 0; /* футер находится вне магазина */
+        padding-bottom: 50px; /* отступ до футера */
+    }
+
+    .shop-title {
+        font-size: 1.55rem; /* размер */
+    }
+
+    .shop-balance {
+        margin-bottom: 20px; /* отступ */
+        font-size: 0.86rem; /* размер */
+    }
+
+    .shop-card-content {
+        padding: 13px; /* отступ */
+    }
+
+    .shop-card-content h3 {
+        font-size: 0.93rem; /* размер */
+    }
+
+    .shop-card-content p {
+        font-size: 0.79rem; /* размер */
+        min-height: auto; /* убираем фиксированную высоту */
+    }
+
+    .shop-card-price {
+        font-size: 0.82rem; /* размер */
+    }
+
+    .shop-buy-btn {
+        font-size: 0.8rem; /* размер */
+        padding: 7px 10px; /* отступ */
+    }
+
+    .submit,
+    .main-button {
+        width: 100% !important; /* ширина экрана */
+        max-width: 100%; /* максимум */
+    }
+
+    .input-group {
+        flex-direction: column !important; /* столбик */
+        border: none !important; /* без рамки */
+    }
+
+    .input-group > .form-select,
+    .input-group > .form-control,
+    .input-group > .input-group-text {
+        width: 100%; /* ширина */
+    }
+
+    .none-mobile {
+        display: none !important; /* скрываем */
+    }
+
+    .input-group > span.input-group-text {
+        padding: 0 0 0 4px !important; /* отступ */
+        margin-top: 25px !important; /* отступ сверху */
+        margin-bottom: 0 !important; /* отступ снизу */
+        font-size: 13px !important; /* размер */
+        color: var(--muted) !important; /* цвет */
+        font-weight: 600 !important; /* жирность */
+    }
+
+    .input-group div.input-group-text {
+        width: 100% !important; /* ширина */
+        padding: 0 !important; /* сброс */
+        background: transparent !important; /* прозрачность */
+    }
+
+    .form-check {
+        margin: 8px 0 15px 4px !important; /* отступ */
+    }
+
+    .form-check-input {
+        margin-top: 0 !important; /* выравнивание */
+        margin-right: 8px !important; /* расстояние */
+    }
+
+    .footer .footer-section {
+        padding: 19px 10px; /* отступ */
+    }
+
+    .footer .footer-section p {
+        font-size: 0.82rem; /* размер */
+    }
+
+    .footer-bottom {
+        font-size: 0.70rem; /* размер */
+    }
+}
+
+
+/* ========================================================= */
+/* МАЛЕНЬКИЕ ЭКРАНЫ */
+/* ========================================================= */
+
+@media (max-width: 400px) {
+
+    header .logo a {
+        font-size: 1.08rem; /* размер */
+    }
+
+    .shop-title {
+        font-size: 1.35rem; /* размер */
+    }
+
+    .shop-card-content h3 {
+        font-size: 0.88rem; /* размер */
+    }
+
+    .shop-buy-btn {
+        width: 100%; /* кнопка на всю карточку */
+    }
+}
+
+
+/* ========================================================= */
+/* СТРАНИЦА ЖАЛОБЫ НА ДУБЛЁРА */
+/* ========================================================= */
+
+.complaint-page {
+    flex: 1 0 auto; /* растягиваем основную часть страницы */
+    width: 100%; /* ширина */
+    max-width: 1120px; /* ограничиваем ширину */
+    padding-top: 44px; /* отступ сверху */
+    padding-bottom: 70px; /* отступ перед футером */
+}
+
+/* верхний красивый блок страницы */
+.complaint-hero {
+    position: relative; /* база для декоративных элементов */
+    display: flex; /* ставим иконку и текст рядом */
+    align-items: center; /* выравниваем по центру */
+    gap: 22px; /* расстояние */
+    padding: 30px 34px; /* внутренние отступы */
+    margin-bottom: 24px; /* расстояние до формы */
+    overflow: hidden; /* обрезаем декор */
+    border: 1px solid rgba(123, 44, 191, 0.13); /* рамка */
+    border-radius: 24px; /* скругление */
+    background: linear-gradient(135deg, rgba(255,255,255,0.96), rgba(250,241,255,0.92)); /* фон */
+    box-shadow: var(--shadow); /* тень */
+}
+
+/* декоративное сияние */
+.complaint-hero::after {
+    content: ""; /* создаем элемент */
+    position: absolute; /* абсолютное положение */
+    width: 230px; /* размер */
+    height: 230px; /* размер */
+    right: -85px; /* положение */
+    top: -110px; /* положение */
+    border-radius: 50%; /* круг */
+    background: rgba(217, 70, 239, 0.14); /* цвет */
+    filter: blur(5px); /* мягкость */
+    pointer-events: none; /* не мешает кликам */
+}
+
+.complaint-icon {
+    position: relative; /* поверх декора */
+    z-index: 1; /* слой */
+    flex: 0 0 66px; /* фиксированный размер */
+    width: 66px; /* ширина */
+    height: 66px; /* высота */
+    display: flex; /* центрируем иконку */
+    align-items: center; /* центр */
+    justify-content: center; /* центр */
+    color: white; /* цвет */
+    font-size: 1.55rem; /* размер */
+    border-radius: 20px; /* скругление */
+    background: linear-gradient(135deg, var(--purple), var(--pink)); /* фон */
+    box-shadow: 0 12px 28px rgba(123, 44, 191, 0.27); /* тень */
+}
+
+.complaint-kicker {
+    margin-bottom: 5px; /* отступ */
+    color: var(--purple); /* цвет */
+    font-size: 0.82rem; /* размер */
+    font-weight: 700; /* жирность */
+    letter-spacing: 0.08em; /* расстояние */
+    text-transform: uppercase; /* верхний регистр */
+}
+
+.complaint-hero h2 {
+    margin: 0 0 7px; /* отступ */
+    font-size: clamp(1.55rem, 3vw, 2.1rem); /* адаптивный размер */
+    font-weight: 700; /* жирность */
+}
+
+.complaint-hero p {
+    max-width: 760px; /* ширина */
+    margin: 0; /* убираем отступ */
+    color: var(--muted); /* цвет */
+    line-height: 1.55; /* читаемость */
+    font-size: 0.94rem; /* размер */
+}
+
+/* сама форма */
+.complaint-card {
+    width: 100%; /* ширина */
+    max-width: 920px; /* ограничиваем */
+    margin: 0 auto; /* центрируем */
+    padding: 30px; /* отступ */
+    border: 1px solid var(--border); /* рамка */
+    border-radius: 24px; /* скругление */
+    background: rgba(255,255,255,0.96); /* фон */
+    box-shadow: 0 18px 50px rgba(70, 32, 91, 0.11); /* тень */
+}
+
+.complaint-card-head {
+    display: flex; /* размещение */
+    align-items: flex-start; /* сверху */
+    justify-content: space-between; /* края */
+    gap: 20px; /* расстояние */
+    margin-bottom: 27px; /* отступ */
+}
+
+.complaint-card-head h3 {
+    margin: 0 0 6px; /* отступ */
+    font-size: 1.25rem; /* размер */
+    font-weight: 700; /* жирность */
+}
+
+.complaint-card-head p {
+    margin: 0; /* отступ */
+    color: var(--muted); /* цвет */
+    font-size: 0.86rem; /* размер */
+}
+
+.complaint-badge {
+    flex: 0 0 auto; /* не сжимаем */
+    display: inline-flex; /* строка */
+    align-items: center; /* центр */
+    gap: 7px; /* расстояние */
+    padding: 8px 11px; /* отступ */
+    color: #5e2181; /* цвет */
+    border: 1px solid #ead8f5; /* рамка */
+    border-radius: 999px; /* таблетка */
+    background: #faf4ff; /* фон */
+    font-size: 0.74rem; /* размер */
+    font-weight: 600; /* жирность */
+}
+
+.complaint-field {
+    margin-bottom: 22px; /* расстояние между полями */
+}
+
+.complaint-field label {
+    display: flex; /* строка */
+    align-items: center; /* центр */
+    gap: 9px; /* расстояние */
+    margin-bottom: 9px; /* отступ */
+    color: var(--text); /* цвет */
+    font-size: 0.88rem; /* размер */
+    font-weight: 700; /* жирность */
+}
+
+.field-icon {
+    width: 29px; /* размер */
+    height: 29px; /* размер */
+    display: inline-flex; /* центр */
+    align-items: center; /* центр */
+    justify-content: center; /* центр */
+    color: var(--purple); /* цвет */
+    border-radius: 9px; /* скругление */
+    background: #f4eaff; /* фон */
+    font-size: 0.75rem; /* размер */
+}
+
+.complaint-select,
+.complaint-textarea {
+    width: 100% !important; /* вся ширина */
+    color: var(--text) !important; /* цвет */
+    border: 1px solid #ded3e7 !important; /* рамка */
+    border-radius: 13px !important; /* скругление */
+    background: #fcfbfe !important; /* фон */
+    box-shadow: none !important; /* убираем bootstrap */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease; /* плавность */
+}
+
+.complaint-select {
+    min-height: 50px; /* высота */
+    padding: 11px 15px; /* отступ */
+}
+
+.complaint-textarea {
+    min-height: 150px; /* высота */
+    padding: 14px 15px; /* отступ */
+    resize: vertical; /* разрешаем менять высоту */
+}
+
+.complaint-select:focus,
+.complaint-textarea:focus {
+    border-color: var(--purple) !important; /* активная рамка */
+    background: white !important; /* фон */
+    box-shadow: 0 0 0 4px rgba(123,44,191,0.10) !important; /* подсветка */
+}
+
+.complaint-textarea::placeholder {
+    color: #aaa0b2; /* цвет подсказки */
+}
+
+.complaint-hint {
+    display: flex; /* строка */
+    align-items: center; /* центр */
+    gap: 7px; /* расстояние */
+    margin-top: 9px; /* отступ */
+    color: var(--muted); /* цвет */
+    font-size: 0.73rem; /* размер */
+}
+
+.complaint-hint i {
+    color: var(--purple-light); /* цвет */
+}
+
+.complaint-error {
+    min-height: 21px; /* оставляем место под ошибку */
+    margin-top: 6px; /* отступ */
+    color: #d92d52; /* цвет ошибки */
+    font-size: 0.78rem; /* размер */
+}
+
+.complaint-submit {
+    width: 100% !important; /* вся ширина */
+    max-width: none !important; /* убираем ограничение */
+    min-height: 52px; /* высота */
+    margin-top: 3px; /* отступ */
+    display: flex !important; /* центрируем содержимое */
+    align-items: center; /* центр */
+    justify-content: center; /* центр */
+    gap: 9px; /* расстояние */
+    color: white !important; /* текст */
+    border: none !important; /* без рамки */
+    background: linear-gradient(135deg, var(--purple), var(--pink)) !important; /* градиент */
+    box-shadow: 0 12px 25px rgba(123, 44, 191, 0.22); /* тень */
+}
+
+.complaint-submit:hover,
+.complaint-submit:focus {
+    color: white !important; /* текст */
+    background: linear-gradient(135deg, #6921a9, #c637db) !important; /* фон */
+    box-shadow: 0 15px 30px rgba(123, 44, 191, 0.28); /* тень */
+    transform: translateY(-2px); /* движение */
+}
+
+
+/* ========================================================= */
+/* МАГАЗИН — ОТСТУП ПЕРЕД ФУТЕРОМ */
+/* ========================================================= */
+
+.shop-container {
+    flex: 1 0 auto; /* растягиваем магазин по высоте */
+    width: 100%; /* ширина */
+    padding-bottom: 75px; /* оставляем воздух перед футером */
+}
+
+
+/* ========================================================= */
+/* МОБИЛЬНАЯ ВЕРСИЯ ЖАЛОБЫ */
+/* ========================================================= */
+
+@media (max-width: 767px) {
+
+    .complaint-page {
+        padding-top: 25px; /* отступ */
+        padding-bottom: 45px; /* отступ */
+    }
+
+    .complaint-hero {
+        align-items: flex-start; /* выравнивание */
+        gap: 14px; /* расстояние */
+        padding: 21px 18px; /* отступ */
+        border-radius: 19px; /* скругление */
+    }
+
+    .complaint-icon {
+        flex-basis: 48px; /* размер */
+        width: 48px; /* размер */
+        height: 48px; /* размер */
+        border-radius: 15px; /* скругление */
+        font-size: 1.1rem; /* размер */
+    }
+
+    .complaint-hero h2 {
+        font-size: 1.38rem; /* размер */
+    }
+
+    .complaint-hero p {
+        font-size: 0.78rem; /* размер */
+    }
+
+    .complaint-card {
+        padding: 20px 16px; /* отступ */
+        border-radius: 19px; /* скругление */
+    }
+
+    .complaint-card-head {
+        display: block; /* столбик */
+        margin-bottom: 21px; /* отступ */
+    }
+
+    .complaint-card-head h3 {
+        font-size: 1.05rem; /* размер */
+    }
+
+    .complaint-card-head p {
+        font-size: 0.76rem; /* размер */
+    }
+
+    .complaint-badge {
+        margin-top: 13px; /* отступ */
+        font-size: 0.68rem; /* размер */
+    }
+
+    .complaint-textarea {
+        min-height: 135px; /* высота */
+    }
+
+    .complaint-hint {
+        align-items: flex-start; /* начало */
+        font-size: 0.67rem; /* размер */
+    }
+
+    .complaint-submit {
+        min-height: 50px; /* высота */
+        font-size: 0.9rem; /* размер */
+    }
+}
+
+
+/* ========================================================= */
+/* ОСТАТОК ТОВАРА И ПОКУПКИ */
+/* ========================================================= */
+
+.shop-stock {
+    display: flex; /* строка */
+    align-items: center; /* центр */
+    gap: 6px; /* расстояние */
+    color: var(--muted); /* цвет */
+    font-size: 0.82rem; /* размер */
+    font-weight: 600; /* жирность */
+    margin: 0 0 8px 0; /* отступ */
+}
+
+.shop-stock i {
+    color: var(--purple); /* цвет иконки */
+}
+
+.shop-stock-empty {
+    color: #dc3545 !important; /* красный когда товар закончился */
+}
+
+.shop-stock-empty i {
+    color: #dc3545 !important; /* красная иконка */
+}
+
+.shop-message {
+    width: fit-content; /* размер по содержимому */
+    max-width: 100%; /* не выходим за экран */
+    min-height: 0; /* без пустого места */
+    margin: -14px auto 24px; /* располагаем под балансом */
+    padding: 0; /* по умолчанию без рамки */
+    border-radius: 12px; /* скругление */
+    font-size: 0.86rem; /* размер */
+    font-weight: 700; /* жирность */
+    text-align: center; /* центр */
+}
+
+.shop-message.success {
+    color: #16803c; /* зеленый */
+}
+
+.shop-message.error {
+    color: #c53030; /* красный */
+}
+
+.shop-buy-btn:disabled {
+    opacity: 0.58; /* делаем кнопку неактивной визуально */
+    cursor: not-allowed; /* курсор */
+    transform: none !important; /* не двигаем */
+}
+
+.shop-buy-btn:disabled:hover {
+    color: var(--purple-dark) !important; /* не меняем цвет текста */
+    background: #f7edfb !important; /* не меняем фон */
+    border-color: #d9c3e5 !important; /* не меняем рамку */
+}
+
+/* карточка покупок в профиле */
+.purchased-card {
+    margin-bottom: 24px !important; /* расстояние до истории */
+}
+
+.purchases-title {
+    display: flex; /* строка */
+    align-items: center; /* центр */
+    gap: 10px; /* расстояние */
+    margin-bottom: 16px; /* отступ */
+}
+
+.purchases-title i {
+    color: var(--purple); /* иконка */
+    font-size: 1.25rem; /* размер */
+}
+
+.purchases-title h3 {
+    margin: 0; /* убираем стандартный отступ */
+    color: var(--text); /* цвет */
+    font-size: 1.25rem; /* размер */
+    font-weight: 700; /* жирность */
+}
+
+.purchases-list {
+    display: flex; /* список */
+    flex-direction: column; /* столбик */
+    gap: 8px; /* расстояние */
+}
+
+.purchase-item {
+    display: flex; /* строка */
+    align-items: center; /* центр */
+    gap: 10px; /* расстояние */
+    padding: 10px 12px; /* отступ */
+    background: #faf7fc; /* фон */
+    border: 1px solid var(--border); /* рамка */
+    border-radius: 12px; /* скругление */
+    color: var(--text); /* текст */
+    font-size: 0.9rem; /* размер */
+    font-weight: 600; /* жирность */
+}
+
+.purchase-number {
+    display: inline-flex; /* центрируем номер */
+    align-items: center; /* центр */
+    justify-content: center; /* центр */
+    flex: 0 0 27px; /* фиксированная ширина */
+    width: 27px; /* ширина */
+    height: 27px; /* высота */
+    border-radius: 50%; /* круг */
+    color: white; /* цвет */
+    background: linear-gradient(135deg, var(--purple), var(--pink)); /* градиент */
+    font-size: 0.76rem; /* размер */
+}
+
+@media (max-width: 500px) {
+    .shop-stock {
+        font-size: 0.77rem; /* уменьшаем на телефоне */
+    }
+
+    .shop-message {
+        margin-bottom: 18px; /* уменьшаем отступ */
+        font-size: 0.78rem; /* уменьшаем текст */
+    }
+
+    .purchase-item {
+        font-size: 0.82rem; /* уменьшаем текст */
+    }
+}
+
+/* ========================================================= */
+/* ТОПЫ УЧЕНИКОВ И ГРУПП (ГЛАВНАЯ) */
+/* ========================================================= */
+
+.top-section {
+    margin-top: 10px; /* отступ от карусели */
+    margin-bottom: 60px; /* воздух перед футером */
+}
+
+.container .top-title {
+    display: flex; /* иконка и текст в строку */
+    align-items: center; /* центр */
+    justify-content: center; /* центрируем заголовок */
+    gap: 10px; /* расстояние */
+    font-size: 1.55rem; /* размер как у заголовка новостей */
+    margin-bottom: 18px; /* отступ */
+}
+
+.top-title i {
+    color: #e0a800; /* золотой кубок */
+}
+
+.top-switch {
+    display: flex; /* кнопки в строку */
+    flex-wrap: wrap; /* переносим на телефоне */
+    align-items: center; /* центр */
+    justify-content: center; /* центрируем */
+    gap: 8px; /* расстояние */
+    margin-bottom: 10px; /* отступ */
+}
+
+.top-switch-label {
+    color: var(--muted); /* цвет */
+    font-size: 0.9rem; /* размер */
+    font-weight: 700; /* жирность */
+    margin-right: 4px; /* отступ */
+}
+
+.top-btn {
+    padding: 8px 16px; /* отступ */
+    color: var(--purple-dark); /* цвет текста */
+    background: white; /* фон */
+    border: 1px solid #d9c3e5; /* рамка */
+    border-radius: 999px; /* таблетка */
+    font-size: 0.86rem; /* размер */
+    font-weight: 700; /* жирность */
+    transition: all 0.2s ease; /* плавность */
+}
+
+.top-btn:hover {
+    background: #f7edfb; /* фон при наведении */
+    transform: translateY(-1px); /* движение */
+}
+
+.top-btn.active,
+.top-btn.active:hover {
+    color: white; /* текст активной кнопки */
+    background: linear-gradient(135deg, var(--purple), var(--pink)); /* градиент как у главных кнопок */
+    border-color: transparent; /* без рамки */
+    box-shadow: 0 6px 16px rgba(123, 44, 191, 0.25); /* тень */
+}
+
+.top-table-wrap {
+    margin-top: 18px; /* отступ от кнопок */
+    background: rgba(255,255,255,0.96); /* фон */
+    border: 1px solid var(--border); /* рамка */
+    border-radius: 20px; /* скругление */
+    box-shadow: var(--shadow); /* тень */
+    overflow: hidden; /* скругляем углы таблицы */
+}
+
+.top-table {
+    margin: 0; /* убираем отступы bootstrap */
+    --bs-table-bg: transparent; /* прозрачный фон */
+    color: var(--text); /* цвет текста */
+}
+
+.top-table thead th {
+    padding: 14px 16px; /* отступ */
+    color: var(--purple-dark); /* цвет */
+    background: #f7edfb; /* фон шапки таблицы */
+    border-bottom: 1px solid var(--border); /* линия */
+    font-size: 0.85rem; /* размер */
+    font-weight: 700; /* жирность */
+    white-space: nowrap; /* без переноса */
+}
+
+.top-table tbody td {
+    padding: 12px 16px; /* отступ */
+    vertical-align: middle; /* центр */
+    border-color: var(--border); /* линии */
+    font-size: 0.92rem; /* размер */
+    font-weight: 600; /* жирность */
+}
+
+.top-table tbody tr:hover td {
+    background: #fbf7fd; /* подсветка строки */
+}
+
+/* первые три места */
+.top-table tbody tr:nth-child(1) td:first-child { color: #d4a017; font-weight: 700; }
+.top-table tbody tr:nth-child(2) td:first-child { color: #8a8a8a; font-weight: 700; }
+.top-table tbody tr:nth-child(3) td:first-child { color: #b87333; font-weight: 700; }
+
+@media (max-width: 767px) {
+    .container .top-title {
+        font-size: 1.25rem; /* размер */
+    }
+
+    .top-section {
+        margin-bottom: 40px; /* отступ */
+    }
+
+    .top-btn {
+        padding: 7px 12px; /* отступ */
+        font-size: 0.78rem; /* размер */
+    }
+
+    .top-table thead th,
+    .top-table tbody td {
+        padding: 10px 9px; /* компактнее */
+        font-size: 0.8rem; /* размер */
+    }
+}
+
+
+/* ========================================================= */
+/* СТРАНИЦА "О НАС" */
+/* ========================================================= */
+
+.about-container {
+    padding-top: 35px; /* отступ от шапки */
+    padding-bottom: 60px; /* воздух перед футером */
+}
+
+.container .about-title {
+    display: flex; /* иконка и текст в строку */
+    align-items: center; /* центр */
+    justify-content: center; /* центрируем */
+    gap: 10px; /* расстояние */
+    margin-bottom: 8px; /* отступ */
+    color: var(--purple-dark); /* цвет */
+    font-size: 1.8rem; /* размер */
+    font-weight: 700; /* жирность */
+}
+
+.about-title i {
+    color: var(--purple); /* иконка */
+}
+
+.about-subtitle {
+    max-width: 650px; /* ширина текста */
+    margin: 0 auto 30px; /* центр и отступ вниз */
+    color: var(--muted); /* цвет */
+    font-size: 1rem; /* размер */
+    text-align: center; /* центр */
+}
+
+/* линия от директора к остальным */
+.about-line {
+    width: 3px; /* толщина */
+    height: 34px; /* длина */
+    margin: 0 auto; /* по центру */
+    background: linear-gradient(var(--purple), var(--pink)); /* градиент */
+    border-radius: 3px; /* скругление */
+}
+
+.about-row + .about-row,
+.about-line + .about-row {
+    margin-top: 0; /* ряды идут подряд */
+}
+
+.about-container .about-row:not(:first-of-type) {
+    margin-top: 6px; /* небольшой зазор между рядами */
+}
+
+.about-card {
+    position: relative; /* для подписи на фото */
+    overflow: hidden; /* обрезаем по скруглению */
+    background: white; /* фон */
+    border: 1px solid var(--border); /* рамка */
+    border-radius: 24px; /* скругление */
+    box-shadow: var(--shadow); /* тень */
+    cursor: pointer; /* показываем, что можно нажать */
+    transition: transform 0.25s ease, box-shadow 0.25s ease; /* анимация */
+}
+
+.about-card:hover,
+.about-card:focus-visible {
+    transform: translateY(-4px); /* карточка приподнимается */
+    box-shadow: 0 20px 48px rgba(70, 32, 91, 0.16); /* тень сильнее */
+    outline: none; /* убираем рамку фокуса */
+}
+
+.about-card-image {
+    width: 100%; /* ширина */
+    aspect-ratio: 4 / 5; /* пропорции фото (портрет) */
+    overflow: hidden; /* обрезаем */
+    background: linear-gradient(135deg, #f5eafa, #fdf5ff); /* фон, пока нет фото */
+}
+
+.about-card-image img {
+    display: block; /* убираем пробел */
+    width: 100%; /* ширина */
+    height: 100%; /* высота */
+    object-fit: cover; /* заполняем без искажений */
+    transition: transform 0.35s ease; /* анимация */
+}
+
+.about-card:hover .about-card-image img {
+    transform: scale(1.04); /* легкое увеличение */
+}
+
+/* подпись внизу фото */
+.about-card-caption {
+    position: absolute; /* поверх фото */
+    left: 0; /* край */
+    right: 0; /* край */
+    bottom: 0; /* низ */
+    padding: 40px 18px 16px; /* отступ, сверху место под градиент */
+    color: white; /* цвет */
+    background: linear-gradient(to top, rgba(40, 14, 60, 0.85), transparent); /* затемнение */
+}
+
+.about-card-caption h3 {
+    margin: 0; /* без отступов */
+    color: white; /* цвет */
+    font-size: 1.1rem; /* размер */
+    font-weight: 700; /* жирность */
+}
+
+.about-card-caption span {
+    font-size: 0.85rem; /* размер */
+    opacity: 0.9; /* чуть прозрачнее */
+}
+
+/* текст внутри карточки скрыт, показывается в окне */
+.about-card-text {
+    display: none;
+}
+
+/* окно с текстом */
+.about-modal {
+    border: none; /* без рамки */
+    border-radius: 22px; /* скругление */
+}
+
+.about-modal .modal-header {
+    align-items: flex-start; /* крестик сверху */
+    border-bottom: 1px solid var(--border); /* линия */
+}
+
+.about-modal .modal-title {
+    color: var(--purple-dark); /* цвет */
+    font-weight: 700; /* жирность */
+}
+
+.about-modal-role {
+    color: var(--muted); /* цвет */
+    font-size: 0.9rem; /* размер */
+}
+
+.about-modal .modal-body {
+    color: var(--text); /* цвет */
+    line-height: 1.65; /* межстрочный */
+}
+
+@media (max-width: 767px) {
+    .about-container {
+        padding-top: 25px; /* отступ */
+        padding-bottom: 40px; /* отступ */
+    }
+
+    .container .about-title {
+        font-size: 1.45rem; /* размер */
+    }
+
+    .about-subtitle {
+        font-size: 0.92rem; /* размер */
+        margin-bottom: 22px; /* отступ */
+    }
+}
+
+/* ========================================================= /
+/ МОБИЛЬНАЯ ВЕРСИЯ ТОПОВ — ИСПРАВЛЕНИЯ /
+/ ========================================================= */
+@media (max-width: 767px) {
+    /* Контейнер топа */
+    .top-section {
+        margin-top: 5px;
+        margin-bottom: 35px;
+        padding: 0 4px; /* небольшой отступ по бокам */
+    }
+    
+    /* Заголовок */
+    .container .top-title {
+        font-size: 1.15rem;
+        margin-bottom: 14px;
+        gap: 8px;
+        flex-wrap: wrap; /* перенос если не влезает */
+        justify-content: center;
+    }
+    
+    .top-title i {
+        font-size: 1.1rem; /* иконка поменьше */
+    }
+    
+    /* Переключатель категорий */
+    .top-switch {
+        gap: 6px;
+        margin-bottom: 12px;
+        justify-content: center;
+    }
+    
+    .top-switch-label {
+        width: 100%; /* подпись на отдельной строке */
+        text-align: center;
+        margin-right: 0;
+        margin-bottom: 4px;
+        font-size: 0.82rem;
+    }
+    
+    .top-btn {
+        padding: 7px 11px;
+        font-size: 0.76rem;
+        flex: 0 1 auto; /* кнопки подстраиваются */
+        white-space: nowrap; /* не переносим текст внутри кнопки */
+    }
+    
+    /* Обёртка таблицы — горизонтальная прокрутка */
+    .top-table-wrap {
+        overflow-x: auto; /* прокрутка если таблица шире экрана */
+        -webkit-overflow-scrolling: touch; /* плавная прокрутка на iOS */
+        border-radius: 16px;
+        margin: 0 -4px; /* компенсируем отступы секции */
+        padding: 0 4px;
+    }
+    
+    /* Сама таблица — минимальная ширина чтобы не сжималась */
+    .top-table {
+        min-width: 100%; /* на всякий случай */
+        table-layout: auto; /* автоматическая ширина колонок */
+    }
+    
+    /* Заголовки таблицы */
+    .top-table thead th {
+        padding: 11px 8px;
+        font-size: 0.75rem;
+        white-space: normal; /* разрешаем перенос */
+        text-align: center;
+        line-height: 1.3;
+    }
+    
+    /* Ячейки таблицы */
+    .top-table tbody td {
+        padding: 10px 8px;
+        font-size: 0.78rem;
+        text-align: center;
+        vertical-align: middle;
+        word-break: break-word; /* перенос длинных слов */
+    }
+    
+    /* Первая колонка с местом — чуть шире */
+    .top-table tbody td:first-child {
+        font-size: 0.85rem;
+        font-weight: 700;
+        min-width: 32px;
+    }
+    
+    /* Строки при наведении */
+    .top-table tbody tr:hover td {
+        background: #fbf7fd;
+    }
+}
+
+/* ========================================================= /
+/ ОЧЕНЬ МАЛЕНЬКИЕ ЭКРАНЫ (до 400px) /
+/ ========================================================= */
+@media (max-width: 400px) {
+    .top-section {
+        padding: 0 2px;
+    }
+    
+    .container .top-title {
+        font-size: 1.05rem;
+        gap: 6px;
+    }
+    
+    .top-title i {
+        font-size: 1rem;
+    }
+    
+    .top-switch-label {
+        font-size: 0.76rem;
+    }
+    
+    .top-btn {
+        padding: 6px 9px;
+        font-size: 0.72rem;
+    }
+    
+    .top-table-wrap {
+        border-radius: 14px;
+        margin: 0 -2px;
+        padding: 0 2px;
+    }
+    
+    .top-table thead th {
+        padding: 9px 6px;
+        font-size: 0.7rem;
+    }
+    
+    .top-table tbody td {
+        padding: 8px 6px;
+        font-size: 0.73rem;
+    }
+    
+    .top-table tbody td:first-child {
+        font-size: 0.8rem;
+        min-width: 28px;
+    }
+}

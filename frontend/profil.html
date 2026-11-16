@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <link rel="icon" type="image/x-icon" href="liceum.png">
+    <noscript>
+        <meta http-equiv="refresh" content="0; url=index.html"> <!-- при отключенном джс перебросит на вход -->
+    </noscript>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- чтоб сайт не сжимало и не растягивало -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- ускорение загрузки шрифтов -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <!-- ускорение загрузки шрифтов -->
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&amp;display=swap" rel="stylesheet"> <!-- загрузка шрифтов -->
+    <title>Самоуправление 2026</title> <!-- название страницы -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> <!-- подключение бустрапа -->
+    <link rel="stylesheet" href="css/style.css"> <!-- связь с ксс -->
+</head>
+
+<body>
+
+<!-- ШАПКА -->
+<header class="container-fluid"> <!-- растягивает шапку до краев -->
+    <div class="container"> <!-- центровка контента -->
+        <div class="row align-items-center"> <!-- выравнивание по вертикали -->
+            <div class="col-6 col-md-4 text-start"> <!-- выделяет место логотипу на всех видах устройств -->
+                <h1 class="logo"><a href="/">Самоуправление 2026</a></h1> <!-- логотип -->
+            </div>
+
+            <div class="col-6 d-md-none text-end"> <!-- выделяет место бургеру на телефоне -->
+                <button class="burger-btn" id="burgerBtn"> <!-- кнопка бургер с кастомным классом -->
+                    <i class="fa-solid fa-bars"></i> <!-- иконка бургеру -->
+                </button>
+            </div>
+
+            <nav id="mobileNav" class="col-12 col-md-8 d-md-flex justify-content-md-end main-nav collapse"> <!-- контейнер навигации -->
+                <button class="close-btn d-md-none" id="closeBtn"> <!-- кнопка крестик на телефоне -->
+                    <i class="fa-solid fa-xmark"></i> <!-- иконка крестика -->
+                </button>
+
+                <ul class="main-menu p-0 m-0"> <!-- список навигационных ссылок -->
+                    <li><a href="main.html" class="nav-link-close"><i class="fa-solid fa-house"></i> Главная</a></li>
+                    <li><a href="about.html" class="nav-link-close"><i class="fa-solid fa-circle-info"></i> О нас</a></li>
+                    <li><a href="shop.html" class="nav-link-close"><i class="fa-solid fa-store"></i> Магазин</a></li>
+
+                    <li class="nav-item dropdown cabinet-dropdown">
+                        <a href="#" class="dropdown-toggle-custom" id="cabinetDropdown">
+                            <i class="fa-solid fa-user"></i> Кабинет
+                        </a>
+                        <ul class="dropdown-menu submenu" id="mobileSubmenu" aria-labelledby="cabinetDropdown"> <!-- вложенный список кнопок -->
+                            <li><a class="dropdown-item" href="profil.html"><i class="fa-solid fa-circle-user"></i> Профиль</a></li>
+                            <li><a class="dropdown-item" id="dublerBtn" href="dubler.html"><i class="fa-solid fa-chalkboard-user"></i> Дублер панель</a></li>
+                            <li id="adminNavItem" style="display:none"><a class="dropdown-item" href="admin.html"><i class="fa-solid fa-user-plus"></i> Админ панель</a></li> <!-- скрипт показывает только админам -->
+                            <li><a class="dropdown-item" id="logoutBtn" href="javascript:void(0)"><i class="fa-solid fa-right-to-bracket"></i> Выход</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="container profile-card my-4">
+    <h5 class="profil">Вы - <span id="user"></span>.</h5>
+    <h5 class="profil">Ваша группа - <span id="group"></span>.</h5>
+    <h5 class="profil">Ваш статус на неделе самоуправления - <span id="status"></span>.</h5>
+    <h5 class="profil"><span id="coinsLabel">Ваше количество renocoins</span> - <span id="coins"></span>.</h5>
+    <h5 class="profil" id="ratingRow" style="display:none">Ваш соцрейтинг - <span id="rating"></span>.</h5> <!-- виден только дублёрам -->
+</div>
+
+<!-- КУПЛЕННЫЕ ТОВАРЫ -->
+<div class="container profile-card purchased-card my-4">
+    <div class="purchases-title">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <h3>Мои покупки</h3>
+    </div>
+    <div id="purchasedProducts" class="purchases-list">
+        Загрузка покупок...
+    </div>
+</div>
+
+<!-- ЛОГИ НАЧИСЛЕНИЙ И СПИСАНИЙ RENOCOINS -->
+<div class="container pb-5 row g-4 mx-auto"> <!-- центровка контента -->
+    <div class="col-12 col-lg-6">
+        <h3>История начислений и списаний</h3> <!-- заголовок -->
+        <div id="coinLogs" class="logs-box">Загрузка истории...</div> <!-- блок с логами renocoins -->
+    </div>
+
+    <!-- ЖАЛОБЫ НА ДУБЛЕРА (только если это профиль дублера) -->
+    <div class="col-12 col-lg-6" id="complaintsSection" style="display: none;"> <!-- по умолчанию скрыто, показываем через джс если дублер -->
+        <h3>Жалобы на вас</h3> <!-- заголовок -->
+        <div id="complaintLogs" class="logs-box">Загрузка жалоб...</div> <!-- блок с логами жалоб -->
+    </div>
+</div>
+<!-- КОНЕЦ ЖАЛОБ НА ДУБЛЕРА -->
+
+<!-- СМЕНА ПАРОЛЯ -->
+<div class="container profile-card my-4" id="passwordCard">
+    <h3><i class="fa-solid fa-key"></i> Смена пароля</h3>
+    <input type="password" id="oldPassword" class="form-control mb-2" placeholder="Текущий пароль" autocomplete="current-password">
+    <input type="password" id="newPassword" class="form-control mb-2" placeholder="Новый пароль (не короче 6 символов)" autocomplete="new-password">
+    <input type="password" id="confirmPassword" class="form-control mb-2" placeholder="Повторите новый пароль" autocomplete="new-password">
+    <button type="button" id="changePasswordBtn" class="submit mt-3 btn btn-primary pink-mobile main-button">Сменить пароль</button>
+    <div id="passwordChangeMsg" class="mt-2"></div>
+</div>
+
+<!-- ФУТЕР -->
+<div class="footer container-fluid"> <!-- контейнер всего футера, который растягивается на всю ширину -->
+    <div class="footer-content container"> <!-- контейнер контента в футере -->
+        <div class="row"> <!-- строка -->
+            <div class="footer-section about col-md-4 col-12"> <!-- разделение футера -->
+                <p>
+                    Самоуправление 2026 - это сайт, сделанный специально для одноименного мероприятия
+                    в Усть-Илимском Экспериментальном лицее имени М.М.Батербиева.
+                </p>
+                <div class="socials"> <!-- соцсети с кастомным классом -->
+                <!-- список соцсетей -->
+                    <a href="https://t.me/apple_winner"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- дезигнед -->
+<div class="footer-bottom container-fluid">
+        &copy; https://samoupravlenie2026.ru | Designed by morisar
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> <!-- бустрап -->
+    <script src="script.js"></script> <!-- подключение js файла -->
+</body>
+</html>

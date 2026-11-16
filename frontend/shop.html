@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <link rel="icon" type="image/x-icon" href="liceum.png">
+    <noscript>
+        <meta http-equiv="refresh" content="0; url=index.html"> <!-- при отключенном джс перебросит на вход -->
+    </noscript>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- чтоб сайт не сжимало и не растягивало -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- ускорение загрузки шрифтов -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <!-- ускорение загрузки шрифтов -->
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&amp;display=swap" rel="stylesheet"> <!-- загрузка шрифтов -->
+    <title>Магазин — Самоуправление 2026</title> <!-- название страницы -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> <!-- подключение бустрапа -->
+    <link rel="stylesheet" href="css/style.css"> <!-- связь с ксс -->
+</head>
+
+<body>
+
+<!-- ШАПКА -->
+<header class="container-fluid"> <!-- растягивает шапку до краев -->
+    <div class="container"> <!-- центровка контента -->
+        <div class="row align-items-center"> <!-- выравнивание по вертикали -->
+            <div class="col-6 col-md-4 text-start"> <!-- выделяет место логотипу на всех видах устройств -->
+                <h1 class="logo"><a href="/">Самоуправление 2026</a></h1> <!-- логотип -->
+            </div>
+
+            <div class="col-6 d-md-none text-end"> <!-- выделяет место бургеру на телефоне -->
+                <button class="burger-btn" id="burgerBtn"> <!-- кнопка бургер с кастомным классом -->
+                    <i class="fa-solid fa-bars"></i> <!-- иконка бургеру -->
+                </button>
+            </div>
+
+            <nav id="mobileNav" class="col-12 col-md-8 d-md-flex justify-content-md-end main-nav"> <!-- контейнер навигации -->
+                <button class="close-btn d-md-none" id="closeBtn"> <!-- кнопка крестик на телефоне -->
+                    <i class="fa-solid fa-xmark"></i> <!-- иконка крестика -->
+                </button>
+
+                <ul class="main-menu p-0 m-0"> <!-- список навигационных ссылок -->
+                    <li><a href="main.html" class="nav-link-close"><i class="fa-solid fa-house"></i> Главная</a></li>
+                    <li><a href="about.html" class="nav-link-close"><i class="fa-solid fa-circle-info"></i> О нас</a></li>
+                    <li><a href="shop.html" class="nav-link-close"><i class="fa-solid fa-store"></i> Магазин</a></li>
+
+                    <li class="nav-item dropdown cabinet-dropdown">
+                        <a href="#" class="dropdown-toggle-custom" id="cabinetDropdown">
+                            <i class="fa-solid fa-user"></i> Кабинет
+                        </a>
+                        <ul class="dropdown-menu submenu" id="mobileSubmenu" aria-labelledby="cabinetDropdown"> <!-- вложенный список кнопок -->
+                            <li><a class="dropdown-item" href="profil.html"><i class="fa-solid fa-circle-user"></i> Профиль</a></li>
+                            <li><a class="dropdown-item" id="dublerBtn" href="dubler.html"><i class="fa-solid fa-chalkboard-user"></i> Дублер панель</a></li>
+                            <li id="adminNavItem" style="display:none"><a class="dropdown-item" href="admin.html"><i class="fa-solid fa-user-plus"></i> Админ панель</a></li> <!-- скрипт показывает только админам -->
+                            <li><a class="dropdown-item" id="logoutBtn" href="javascript:void(0)"><i class="fa-solid fa-right-to-bracket"></i> Выход</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<!-- МАГАЗИН -->
+<div class="container shop-container">
+
+    <!-- ЗАГОЛОВОК -->
+    <div class="row">
+        <div class="col-12">
+            <h2 class="shop-title">
+                <i class="fa-solid fa-store"></i> Магазин
+            </h2>
+        </div>
+    </div>
+
+    <!-- БАЛАНС -->
+    <div class="row">
+        <div class="col-12">
+            <div class="shop-balance">
+                <i class="fa-solid fa-coins"></i>
+                Ваш баланс: <span id="shopBalance">0</span> renocoins.
+            </div>
+
+            <!-- сообщение магазина -->
+            <div id="shopMessage" class="shop-message" aria-live="polite">Цены пока неизвестны, покупки откроются позже.</div>
+        </div>
+    </div>
+
+
+    <!-- ТОВАРЫ -->
+    <div class="row g-4">
+
+        <!-- ТОВАР 1 -->
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="shop-card">
+
+                <div class="shop-card-image">
+                    <img src="image/shop/plus_05_zachet.png"
+                         alt="+0.5 к зачётной оценке">
+                </div>
+
+                <div class="shop-card-content">
+
+                    <h3>+0.5 к зачётной оценке</h3>
+
+                    <p>
+                        Большой апгрейд оценки.
+                    </p>
+
+                    <div class="shop-stock">
+                        <i class="fa-solid fa-box"></i>
+                        Осталось: <span class="shop-stock-count">20</span> шт.
+                    </div>
+
+                    <div class="shop-card-price">
+                        <i class="fa-solid fa-coins"></i>
+                        <span>?</span> renocoins.
+                    </div>
+
+                    <!-- кнопка заблокирована, пока цены неизвестны -->
+                    <button class="shop-buy-btn" data-product-id="1" disabled>
+                        <i class="fa-solid fa-lock"></i>
+                        Скоро в продаже
+                    </button>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ТОВАР 2 -->
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="shop-card">
+
+                <div class="shop-card-image">
+                    <img src="image/shop/plus_05_ocenka.png"
+                         alt="+0.5 к выставленной оценке">
+                </div>
+
+                <div class="shop-card-content">
+
+                    <h3>+0.5 к выставленной оценке</h3>
+
+                    <p>
+                        Апгрейд оценки.
+                    </p>
+
+                    <div class="shop-stock">
+                        <i class="fa-solid fa-box"></i>
+                        Осталось: <span class="shop-stock-count">100</span> шт.
+                    </div>
+
+                    <div class="shop-card-price">
+                        <i class="fa-solid fa-coins"></i>
+                        <span>?</span> renocoins.
+                    </div>
+
+                    <!-- кнопка заблокирована, пока цены неизвестны -->
+                    <button class="shop-buy-btn" data-product-id="2" disabled>
+                        <i class="fa-solid fa-lock"></i>
+                        Скоро в продаже
+                    </button>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ТОВАР 3 -->
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="shop-card">
+
+                <div class="shop-card-image">
+                    <img src="image/shop/marmelad.png"
+                         alt="Мармелад">
+                </div>
+
+                <div class="shop-card-content">
+
+                    <h3>Мармелад</h3>
+
+                    <p>
+                        Сладкое никогда не лишнее.
+                    </p>
+
+                    <div class="shop-stock">
+                        <i class="fa-solid fa-box"></i>
+                        Осталось: <span class="shop-stock-count">35</span> шт.
+                    </div>
+
+                    <div class="shop-card-price">
+                        <i class="fa-solid fa-coins"></i>
+                        <span>?</span> renocoins.
+                    </div>
+
+                    <!-- кнопка заблокирована, пока цены неизвестны -->
+                    <button class="shop-buy-btn" data-product-id="3" disabled>
+                        <i class="fa-solid fa-lock"></i>
+                        Скоро в продаже
+                    </button>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ТОВАР 4 -->
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="shop-card">
+
+                <div class="shop-card-image">
+                    <img src="image/shop/wb_koshelek.png"
+                         alt="Сертификат WB на 500р">
+                </div>
+
+                <div class="shop-card-content">
+
+                    <h3>Сертификат WB на 500р</h3>
+
+                    <p>
+                        Твоя корзина до сих пор полная.
+                    </p>
+
+                    <div class="shop-stock">
+                        <i class="fa-solid fa-box"></i>
+                        Осталось: <span class="shop-stock-count">4</span> шт.
+                    </div>
+
+                    <div class="shop-card-price">
+                        <i class="fa-solid fa-coins"></i>
+                        <span>?</span> renocoins.
+                    </div>
+
+                    <!-- кнопка заблокирована, пока цены неизвестны -->
+                    <button class="shop-buy-btn" data-product-id="4" disabled>
+                        <i class="fa-solid fa-lock"></i>
+                        Скоро в продаже
+                    </button>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ТОВАР 5 -->
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="shop-card">
+
+                <div class="shop-card-image">
+                    <img src="image/shop/yandex_plus.png"
+                         alt="Яндекс Плюс на месяц">
+                </div>
+
+                <div class="shop-card-content">
+
+                    <h3>Яндекс Плюс на месяц</h3>
+
+                    <p>
+                        Кто там сейчас в чартах?
+                    </p>
+
+                    <div class="shop-stock">
+                        <i class="fa-solid fa-box"></i>
+                        Осталось: <span class="shop-stock-count">2</span> шт.
+                    </div>
+
+                    <div class="shop-card-price">
+                        <i class="fa-solid fa-coins"></i>
+                        <span>?</span> renocoins.
+                    </div>
+
+                    <!-- кнопка заблокирована, пока цены неизвестны -->
+                    <button class="shop-buy-btn" data-product-id="5" disabled>
+                        <i class="fa-solid fa-lock"></i>
+                        Скоро в продаже
+                    </button>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ТОВАР 6 -->
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="shop-card">
+
+                <div class="shop-card-image">
+                    <img src="image/shop/dodo_pizza.png"
+                         alt="Сертификат Додо Пицца на большую пиццу">
+                </div>
+
+                <div class="shop-card-content">
+
+                    <h3>Сертификат Додо Пицца на большую пиццу</h3>
+
+                    <p>
+                        Большая пицца найдёт, куда поместиться.
+                    </p>
+
+                    <div class="shop-stock">
+                        <i class="fa-solid fa-box"></i>
+                        Осталось: <span class="shop-stock-count">1</span> шт.
+                    </div>
+
+                    <div class="shop-card-price">
+                        <i class="fa-solid fa-coins"></i>
+                        <span>?</span> renocoins.
+                    </div>
+
+                    <!-- кнопка заблокирована, пока цены неизвестны -->
+                    <button class="shop-buy-btn" data-product-id="6" disabled>
+                        <i class="fa-solid fa-lock"></i>
+                        Скоро в продаже
+                    </button>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ТОВАР 7 -->
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="shop-card">
+
+                <div class="shop-card-image">
+                    <img src="image/shop/letual_500.png"
+                         alt="Сертификат 500р в Летуаль">
+                </div>
+
+                <div class="shop-card-content">
+
+                    <h3>Сертификат 500р в Летуаль</h3>
+
+                    <p>
+                        Позволь себе Dior.
+                    </p>
+
+                    <div class="shop-stock">
+                        <i class="fa-solid fa-box"></i>
+                        Осталось: <span class="shop-stock-count">2</span> шт.
+                    </div>
+
+                    <div class="shop-card-price">
+                        <i class="fa-solid fa-coins"></i>
+                        <span>?</span> renocoins.
+                    </div>
+
+                    <!-- кнопка заблокирована, пока цены неизвестны -->
+                    <button class="shop-buy-btn" data-product-id="7" disabled>
+                        <i class="fa-solid fa-lock"></i>
+                        Скоро в продаже
+                    </button>
+
+                </div>
+            </div>
+        </div>
+
+    </div> <!-- закрываем список товаров -->
+
+</div> <!-- закрываем shop-container -->
+
+<!-- ФУТЕР -->
+<div class="footer container-fluid"> <!-- контейнер всего футера, который растягивается на всю ширину -->
+    <div class="footer-content container"> <!-- контейнер контента в футере -->
+        <div class="row"> <!-- строка -->
+            <div class="footer-section about col-md-4 col-12"> <!-- разделение футера -->
+                <p>
+                    Самоуправление 2026 - это сайт, сделанный специально для одноименного мероприятия
+                    в Усть-Илимском Экспериментальном лицее имени М.М.Батербиева.
+                </p>
+                <div class="socials"> <!-- соцсети с кастомным классом -->
+                <!-- список соцсетей -->
+                    <a href="https://t.me/apple_winner"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- дезигнед -->
+<div class="footer-bottom container-fluid">
+        &copy; https://samoupravlenie2026.ru | Designed by morisar
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> <!-- бустрап -->
+    <script src="script.js"></script> <!-- подключение js файла -->
+</body>
+</html>
