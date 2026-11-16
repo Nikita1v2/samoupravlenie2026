@@ -94,8 +94,6 @@ python hash_existing_passwords.py
  
 Сайт сделали Кирилл Зуев (разработка сайта, соцсети) и Никита Добровольский (хостинг и деплой). Дизайн: morisar.
  
-Telegram команды: https://t.me/apple_winner
- 
 ## Лицензия
  
 [MIT](LICENSE)
