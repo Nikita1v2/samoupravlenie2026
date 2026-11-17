@@ -20,7 +20,7 @@
 |-------|------------|
 | Фронтенд | HTML, CSS, JavaScript, Bootstrap 5.3, Font Awesome 6, шрифт Comfortaa |
 | Бэкенд | Python, Flask, Flask-SQLAlchemy, Flask-Cors |
-| База данных | PostgreSQL (драйвер `psycopg`) |
+| База данных | SQLAlchemy (драйвер `psycopg`) |
 | Запуск на сервере | gunicorn |
  
 ## Структура репозитория
@@ -49,7 +49,7 @@
  
 ## Запуск локально
  
-Нужен Python 3.10+ и PostgreSQL.
+Нужен Python 3.10+.
  
 ```bash
 git clone https://github.com/nikita1v2/samoupravlenie2026.git
