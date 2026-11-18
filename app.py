@@ -31,16 +31,11 @@ CORS(app, origins=[
 
 # админы
 ADMIN_NAMES = {
-    'Соколов Евгений Сергеевич',
-    'Зуев Кирилл Алексеевич',
-    'Самков Александр Александрович',
-    'Новокрещенных Тимофей Дмитриевич',
-    'Добровольский Никита Иванович',
-    'Левина Елизавета Сергеевна',
+    'admin names'
 }
 
 # бд
-DATABASE_PATH = os.environ.get('DATABASE_PATH', '/home/apple/web_server/data/students.db')
+DATABASE_PATH = os.environ.get('DATABASE_PATH', 'adres/to/base')
 app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DATABASE_PATH}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -50,7 +45,7 @@ db = SQLAlchemy(app)
 _secret = os.environ.get('SECRET_KEY')
 if not _secret:
     print('ВНИМАНИЕ: SECRET_KEY не задан в переменных окружения, используется ключ из кода. Задайте SECRET_KEY на сервере!')
-    _secret = 'AmveraChangeThisSecretKey_9f3c7b2e6a1d4f8c'
+    _secret = 'your secret key'
 app.secret_key = _secret
 
 # создатель токенов
